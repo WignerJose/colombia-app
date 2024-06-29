@@ -1,24 +1,24 @@
-import logo from './logo.svg';
+import  Home  from './presentation/pages/Home';
 import './App.css';
+import ResponsiveAppBar from './presentation/components/AppBar';
+import SimpleContainer from './presentation/components/MainContainer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="">
+        <SimpleContainer>
+          <ResponsiveAppBar/>
+          <Routes>
+             <Route path='/' element={<Home/>} ></Route>
+             <Route path='/departments'></Route>
+             <Route path='/tourist-places'></Route>
+             <Route path='/others'></Route>
+          </Routes>
+        </SimpleContainer>
+      </div>
+    </Router>
   );
 }
 
