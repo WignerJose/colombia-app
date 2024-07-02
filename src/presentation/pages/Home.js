@@ -1,9 +1,28 @@
-import { Box } from '@mui/material';
-import React from 'react'
+import { Box, Stack } from '@mui/material';
+import React, { useContext } from 'react'
 import InfoIcon from '@mui/icons-material/Info';
 import DetailsIcon from '@mui/icons-material/Details';
+import CircularProgress from '@mui/material/CircularProgress';
 import './Home/Home.css';
+import { AppContext } from '../context/AppContext';
 const Home = () => {
+
+    const {state} = useContext(AppContext);
+    const {info, isLoading, error} = state;
+
+
+    if(isLoading){
+        return (
+            <Stack sx={{ color: 'grey.500', display:'flex',justifyContent:'center'  }} spacing={2} direction="row">
+                <CircularProgress color="secondary" />
+            </Stack>
+        );
+    }
+
+
+    if(error){
+        return <div>Error :{error.message}</div>;
+    }
 
     const containerFlagStyle = {
         display:'flex',
@@ -67,12 +86,16 @@ const Home = () => {
         gap:'5px'
     }
 
+    const centerContainer = {
+        textAlign:'center'
+    }
+
     return (
         <Box sx={{ padding: '20px', backgroundColor: '#f0f0f0' }}>
             <div style={containerFlagStyle}>
-                <img height={200} style={containerImgStyle} src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/New-Flag-of-the-President-of-Colombia.svg/1200px-New-Flag-of-the-President-of-Colombia.svg.png'></img>
-                <div>
-                    <h1>Hello, Welcome to the Colombia page! </h1>
+                <img height={200} style={containerImgStyle} src={info.flagImg} ></img>
+                <div style={centerContainer}>
+                    <h1>Hello, Welcome to the {info.name} page! </h1>
                 </div>
             </div>
 
@@ -83,7 +106,7 @@ const Home = () => {
                         <h5>Info</h5>
                     </div>
                     <div style={columnDescriptionStyle}>
-                        <div style={columnDataStyle}> Colombia, oficialmente República de Colombia, es un país de América del Sur con regiones insulares en América del Norte, cerca de la costa caribeña de Nicaragua, así como en el Océano Pacífico. El territorio continental de Colombia limita al norte con el Mar Caribe, al este y noreste con Venezuela, al sureste con Brasil, al sur y suroeste con Ecuador y Perú, al oeste con el Océano Pacífico y al noroeste con Panamá. Colombia está dividida en 32 departamentos y el Distrito Capital de Bogotá, la ciudad más grande del país. Cubre un área de 1.141.748 kilómetros cuadrados (440.831 millas cuadradas) y tiene una población de 52 millones. El patrimonio cultural de Colombia, que incluye lengua, religión, cocina y arte, refleja su historia como colonia española, fusionando elementos culturales traídos por la inmigración de Europa y Medio Oriente, con los traídos por africanos esclavizados, así como con los de los diversos Civilizaciones indígenas anteriores a la colonización. El español es el idioma oficial del estado, aunque el inglés y otros 64 idiomas son idiomas regionales reconocidos.</div>
+                        <div style={columnDataStyle}>{info.description}</div>
                     </div>
                 </div>
                 <div style={columnStyle}>
@@ -96,27 +119,49 @@ const Home = () => {
                             <div style={flexWrapStyle}>
                                 <div style={flexStyle}>
                                     <strong>Capital:</strong>
-                                    <span>Bogotá</span>
+                                    <span>{info.stateCapital}</span>
                                 </div>
                                 <div style={flexStyle}>
                                     <strong>Superficie:</strong>
-                                    <span>1141748</span>
+                                    <span>{info.surface}</span>
                                 </div>
                                 <div style={flexStyle}>
                                     <strong>Población:</strong>
-                                    <span>52235050</span>
+                                    <span>{info.population}</span>
                                 </div>
                                 <div style={flexStyle}>
                                     <strong>Moneda:</strong>
-                                    <span>Colombian Peso - COP</span>
+                                    <span>{info.currency} - {info.currencyCode}</span>
                                 </div>
                                 <div style={flexStyle}>
                                     <strong>Subregion:</strong>
-                                    <span>South America</span>
+                                    <span>{info.subRegion} </span>
                                 </div>
                                 <div style={flexStyle}>
                                     <strong>Fronteras: </strong>
-                                    <span>Brazil, Panamá, Ecuador, Venezuela, Perú</span>
+                                    <span>
+                                     {info.borders && info.borders.length > 0? (
+                                        info.borders.map((b,key) => (
+                                            <span key={key}> {b}, </span>
+                                        ))
+                                     ) : ('No borders available') }
+                                     </span>
+                                </div>
+                                <div style={flexStyle}>
+                                    <strong>Phone Prefix:</strong>
+                                    <span>{info.phonePrefix} </span>
+                                </div>
+                                <div style={flexStyle}>
+                                    <strong>timeZone:</strong>
+                                    <span>{info.timeZone} </span>
+                                </div>
+                                <div style={flexStyle}>
+                                    <strong>Internet Domain:</strong>
+                                    <span>{info.internetDomain} </span>
+                                </div>
+                                <div style={flexStyle}>
+                                    <strong>Region:</strong>
+                                    <span>{info.region} </span>
                                 </div>
                             </div>
                             <div style={flexWrapStyle}>
