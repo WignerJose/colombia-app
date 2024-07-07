@@ -3,8 +3,8 @@ import React, { useContext } from 'react'
 import InfoIcon from '@mui/icons-material/Info';
 import DetailsIcon from '@mui/icons-material/Details';
 import CircularProgress from '@mui/material/CircularProgress';
-import './Home/Home.css';
-import { AppContext } from '../context/AppContext';
+import './Home.css';
+import { AppContext } from '../../context/AppContext';
 const Home = () => {
 
     const {state} = useContext(AppContext);
@@ -33,12 +33,6 @@ const Home = () => {
     
     const containerImgStyle = {
         borderRadius:'20px'
-    }
-
-    const containerInfoCountryStyle = {
-        display:'grid',
-        gridTemplateColumns:'50% 50%',
-        gap:'5px',
     }
 
     const columnStyle = {
@@ -93,7 +87,7 @@ const Home = () => {
     return (
         <Box sx={{ padding: '20px', backgroundColor: '#f0f0f0' }}>
             <div style={containerFlagStyle}>
-                <img height={200} style={containerImgStyle} src={info.flagImg} ></img>
+                <img height={200} style={containerImgStyle} src={info.flagImg} alt='flag icon' ></img>
                 <div style={centerContainer}>
                     <h1>Hello, Welcome to the {info.name} page! </h1>
                 </div>
