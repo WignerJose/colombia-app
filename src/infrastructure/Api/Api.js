@@ -11,3 +11,13 @@ export const getContry = async()=>{
         throw error;
     }
 };
+
+export const getDepartment = async()=>{
+    try {
+        const response = await axios.get(`${API_BASE_URL}/Department`);
+        return response.data;
+    } catch (error) {
+        console.log('Error axios et', error);
+        throw error;
+    }
+};

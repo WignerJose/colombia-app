@@ -1,7 +1,28 @@
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import React,{useContext} from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import { DepartmentContext } from '../../context/DepartmentContext';
+
 const Department = () => {
 
+
+    const {state} = useContext(DepartmentContext);
+    const {departments, isLoading, error} = state;
+
+
+    if(isLoading){
+        return (
+            <Stack sx={{ color: 'grey.500', display:'flex',justifyContent:'center'  }} spacing={2} direction="row">
+                <CircularProgress color="secondary" />
+            </Stack>
+        );
+    }
+
+
+    if(error){
+        return <div>Error :{error.message}</div>;
+    }
 
     const containerDepartments={
        display:'flex',
@@ -51,58 +72,37 @@ const Department = () => {
         fontSize:'13px'
     }
 
-    return (
-        <Box sx={{ padding: '20px', backgroundColor: '#f0f0f0' }}>
-            <div style={containerDepartments}>
-                <div style={columnTitleStyle} >
-                    <FormatListNumberedIcon sx={{ fontSize: 20}} />
-                    <h5>Lista de departamentos</h5>
-                </div>
-                <div style={columnContainerList}>
-                    <div style={cardStyleList}>
-                        <div style={containerTextCard}>
-                            <strong>Titulo</strong>
-                            <span>descripcuon scripcuon scripcuon scripcuon scripcuon scripcuon scripcuon  scripcuon scripcuon scripcuon  scripcuon scripcuon scripcuon  scripcuon scripcuon scripcuon  scripcuon scripcuon scripcuon  </span>
-                        </div>
-                        <div style={containerDetailsCard}>
-                                <div style={flexStyle}>
-                                    <strong>Region:</strong>
-                                    <span>central</span>
-                                </div>
-                                <div style={flexStyle}>
-                                    <strong>Region:</strong>
-                                    <span>central</span>
-                                </div>
-                                <div style={flexStyle}>
-                                    <strong>Region:</strong>
-                                    <span>central</span>
-                                </div>
-                        </div>
+        return (
+            <Box sx={{ padding: '20px', backgroundColor: '#f0f0f0' }}>
+                <div style={containerDepartments}>
+                    <div style={columnTitleStyle} >
+                        <FormatListNumberedIcon sx={{ fontSize: 20}} />
+                        <h5>Lista de departamentos</h5>
                     </div>
-                    <div style={cardStyleList}>
-                        <div style={containerTextCard}>
-                            <strong>Titulo</strong>
-                            <span>descripcuon scripcuon scripcuon scripcuon scripcuon scripcuon scripcuon  scripcuon scripcuon scripcuon  scripcuon scripcuon scripcuon  scripcuon scripcuon scripcuon  scripcuon scripcuon scripcuon  </span>
-                        </div>
-                        <div style={containerDetailsCard}>
-                                <div style={flexStyle}>
-                                    <strong>Region:</strong>
-                                    <span>central</span>
+                    <div style={columnContainerList}>
+                        {departments && departments.map((department, index) => (
+                            <div style={cardStyleList} key={index}>
+                                <div style={containerTextCard}>
+                                    <strong>{department.name} </strong>
+                                    <span>{department.description}</span>
                                 </div>
-                                <div style={flexStyle}>
-                                    <strong>Region:</strong>
-                                    <span>central</span>
+                                <div style={containerDetailsCard}>
+                                    <div style={flexStyle}>
+                                        <strong>Población:</strong>
+                                        <span>{department.population}</span>
+                                    </div>
+                                    <div style={flexStyle}>
+                                        <strong>Superficie:</strong>
+                                        <span>{department.surface}</span>
+                                    </div>
                                 </div>
-                                <div style={flexStyle}>
-                                    <strong>Region:</strong>
-                                    <span>central</span>
-                                </div>
-                        </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
-            </div>
-        </Box>
-    )
-}
+            </Box>
+        )
+    }
+
 
 export default Department;
