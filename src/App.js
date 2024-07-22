@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './presentation/context/AppContext';
 import Department from './presentation/pages/Departments/Department';
 import { DepartmentProvider } from './presentation/context/DepartmentContext';
+import TouristPlace from './presentation/pages/TouristPlaces/TouristPlace';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
               <Routes>
                 <Route path='/' element={<Home/>} ></Route>
                 <Route path='/departments' element={<Department/>} ></Route>
-                <Route path='/tourist-places'></Route>
+                <Route path='/tourist-places' element={<TouristPlace/>} ></Route>
                 <Route path='/others'></Route>
               </Routes>
             </SimpleContainer>

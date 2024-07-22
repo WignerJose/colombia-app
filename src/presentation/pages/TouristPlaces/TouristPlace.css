@@ -1,0 +1,12 @@
+
+.container-text-card{
+    display: grid;
+    grid-template-columns: 30% 69%;
+    gap: 10px;
+}
+
+@media (max-width: 480px) {
+    .container-text-card {
+        grid-template-columns:auto;
+    }
+  }
