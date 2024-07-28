@@ -2,3 +2,44 @@
     display: grid;
     gap: 5px;
 }
+
+.container-description-contry{
+    border-radius: 20px;
+    background-color: #E0E3E5;
+}
+
+.description-contry{
+    padding:10px;
+    text-align: justify;
+}
+
+.button-see-more-description{
+    display: none;
+    justify-content: end;
+    align-items: center;
+}
+.button-see-less-description{
+    display: none;
+    justify-content: end;
+    align-items: center;
+}
+
+
+@media (max-width: 480px) {
+    .container-description-contry{
+      min-height: 200px;
+      max-height: 260px;
+    }
+
+    .description-contry{
+        max-height: 226px;
+        overflow: hidden;
+    }
+
+    .button-see-more-description{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+    }
+
+  }

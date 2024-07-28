@@ -2,9 +2,50 @@ import { Box, Stack } from '@mui/material';
 import React, { useContext } from 'react'
 import InfoIcon from '@mui/icons-material/Info';
 import DetailsIcon from '@mui/icons-material/Details';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import CircularProgress from '@mui/material/CircularProgress';
 import './Home.css';
 import { AppContext } from '../../context/AppContext';
+
+const seeMoreDescription = (event) => {
+    event.target.closest('.button-see-more-description').style.display = 'none';
+
+    const seeLessElement = document.querySelector('.button-see-less-description');
+    if (seeLessElement) {
+      seeLessElement.style.display = 'flex';
+    }
+
+    const containerContry = document.querySelector('.container-description-contry');
+    if (containerContry) {
+        containerContry.style.maxHeight = 'none';
+    }
+
+    const description = document.querySelector('.description-contry');
+    if (description) {
+        description.style.maxHeight = 'none';
+    }
+}
+
+const seeLessDescription = (event) => {
+    event.target.closest('.button-see-less-description').style.display = 'none';
+
+    const seeLessElement = document.querySelector('.button-see-more-description');
+    if (seeLessElement) {
+      seeLessElement.style.display = 'flex';
+    }
+
+    const containerContry = document.querySelector('.container-description-contry');
+    if (containerContry) {
+        containerContry.style.maxHeight = '260px';
+    }
+
+    const description = document.querySelector('.description-contry');
+    if (description) {
+        description.style.maxHeight = '226px';
+    }
+}
+
 const Home = () => {
 
     const {state} = useContext(AppContext);
@@ -55,8 +96,7 @@ const Home = () => {
 
     const columnDataStyle = {
         padding:'10px',
-        fontFamily:'Roboto',
-        letterSpacing:'.1rem'
+        textAlign: 'justify'
     }
 
     const detailsDataStyle = {
@@ -99,8 +139,10 @@ const Home = () => {
                         <InfoIcon sx={{ fontSize: 20, color:'#4285F4'}} />
                         <h5>Info</h5>
                     </div>
-                    <div style={columnDescriptionStyle}>
-                        <div style={columnDataStyle}>{info.description}</div>
+                    <div className='container-description-contry'>
+                        <div  className='description-contry'>{info.description}</div>
+                        <div className='button-see-more-description' onClick={seeMoreDescription}><strong>Ver mas</strong> <ExpandMoreIcon sx={{ fontSize: 20, color:'#4285F4'}}/> </div>
+                        <div className='button-see-less-description' onClick={seeLessDescription}><strong>Ver menos</strong> <ExpandLessIcon sx={{ fontSize: 20, color:'#4285F4'}}/> </div>
                     </div>
                 </div>
                 <div style={columnStyle}>
