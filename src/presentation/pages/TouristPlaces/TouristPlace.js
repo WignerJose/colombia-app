@@ -1,10 +1,29 @@
 import { Box, Stack } from '@mui/material';
 import MapIcon from '@mui/icons-material/Map';
+import { useContext } from 'react';
+import { TouristPlaceContext } from '../../context/TouristPlaceContext';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import './TouristPlace.css';
 
 const TouristPlace = () => {
 
+    const {state} = useContext(TouristPlaceContext);
+    const {touristPlaces, isLoading, error} = state;
+
+
+    if(isLoading){
+        return (
+            <Stack sx={{ color: 'grey.500', display:'flex',justifyContent:'center'  }} spacing={2} direction="row">
+                <CircularProgress color="secondary" />
+            </Stack>
+        );
+    }
+
+    if(error){
+        return <div>Error :{error.message}</div>;
+    }
+    
     const containerDepartments={
         display:'flex',
         flexDirection:'column',
@@ -69,27 +88,32 @@ const TouristPlace = () => {
                     <h5>Lista de lugares turisticos</h5>
                 </div>
                 <div style={columnContainerList}>
-                        <div style={cardStyleList}>
-                            <div className='container-text-card'>
-                                <div style={columnContainerList}>                                
-                                    <strong>Hacienda napoles </strong>
-                                    <img height={200} style={containerImgStyle}  src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/P%C3%B3rtico_Hacienda_N%C3%A1poles.JPG/800px-P%C3%B3rtico_Hacienda_N%C3%A1poles.JPG" alt='flag icon' ></img>
+                    {
+                        touristPlaces && touristPlaces.map((place, index) => (
+                            <div style={cardStyleList} key={index}>
+                                <div className='container-text-card'>
+                                    <div style={columnContainerList}>                                
+                                        <strong>{place.name}</strong>
+                                        <img height={200} style={containerImgStyle}  src={place.image} alt='flag icon' 
+                                        ></img>
+                                    </div>
+                                    <div style={styleDescriptionText}>
+                                        {place.description}
+                                    </div>
                                 </div>
-                                <div style={styleDescriptionText}>
-                                    La Hacienda Nápoles es el nombre que tuviera en el pasado lo que hoy se conoce y reconoce como el Parque Temático Hacienda Nápoles, definido como un centro de entretenimiento familiar a espacio abierto, ubicado en Colombia, Puerto Triunfo, Antioquia, cuyo eje central es un enorme santuario para la protección de fauna en peligro o amenazada, grandes atracciones de agua, contenidos culturales, lúdicos y ambientales, y una política constante en rescate y conservación de fauna y flora. A pesar de la asociación que su nombre produce con algunos hechos sombríos del pasado reciente de la historia colombiana, el Parque Temático Hacienda Nápoles se ha construido desde cero, a partir de 2007 cuando se propuso su creación. Desde esa época se le considera como el proyecto líder de una de las más grandes transformaciones regionales que ha tenido Colombia luego de la desarticulación del Cartel de Medellín que lideraba Pablo Escobar. Hoy en día la propiedad está en cabeza del Estado colombiano, en tanto sus contenidos son desarrollados por la empresa privada.
+                                <div style={containerDetailsCard}>
+                                    <div style={flexStyle}>
+                                        <strong>Ciudad:</strong>
+                                        <span></span>
+                                    </div>
+                                    <div style={flexStyle}>
+                                        <strong>Ubicacion en el mapa:</strong>
+                                        <span></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div style={containerDetailsCard}>
-                                <div style={flexStyle}>
-                                    <strong>Ciudad:</strong>
-                                    <span></span>
-                                </div>
-                                <div style={flexStyle}>
-                                    <strong>Ubicacion en el mapa:</strong>
-                                    <span></span>
-                                </div>
-                            </div>
                         </div>
+                        ))
+                    }
                 </div>
             </div>
         </Box>

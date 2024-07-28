@@ -21,3 +21,14 @@ export const getDepartment = async()=>{
         throw error;
     }
 };
+
+
+export const getTouristPlace = async()=>{
+    try {
+        const response = await axios.get(`${API_BASE_URL}/TouristicAttraction`);
+        return response.data;
+    } catch (error) {
+        console.log('Error axios et', error);
+        throw error;
+    }
+}

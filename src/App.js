@@ -7,11 +7,13 @@ import { AppProvider } from './presentation/context/AppContext';
 import Department from './presentation/pages/Departments/Department';
 import { DepartmentProvider } from './presentation/context/DepartmentContext';
 import TouristPlace from './presentation/pages/TouristPlaces/TouristPlace';
+import { TouristPlaceProvider } from './presentation/context/TouristPlaceContext';
 
 function App() {
   return (
     <AppProvider>
       <DepartmentProvider>
+        <TouristPlaceProvider>
         <Router>
           <div className="">
             <SimpleContainer>
@@ -25,6 +27,7 @@ function App() {
             </SimpleContainer>
           </div>
         </Router>
+        </TouristPlaceProvider>
       </DepartmentProvider>
     </AppProvider>
   );
