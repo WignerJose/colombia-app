@@ -1,3 +1,21 @@
+# Colombia App
+This project is developed with Material UI and the services are using the APIs from https://api-colombia.com/. Clean Architecture was applied in the project.
+
+## Demonstration
+Here you can see the modules that were worked on: Home, Departments, and Tourist Places.
+
+## Image Home
+![Home](./assets/home-page.png)
+
+## Image Departments
+![Departments](./assets/department-page.png)
+
+## Image Departments
+![Tourist Places](./assets/tourist-place-page.png)
+
+## Gracias por leer :thumbsup: :grinning: :computer:
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
